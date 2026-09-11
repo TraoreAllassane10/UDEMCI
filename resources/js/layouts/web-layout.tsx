@@ -233,7 +233,7 @@ export default function WebLayout({
             <main className="w-full pt-20 flex-1">{children}</main>
 
             {/* Footer */}
-            <footer className="w-full bg-[#012d1d] text-white mt-auto">
+            <footer className="w-full bg-primary text-white mt-auto">
                 <div className="max-w-7xl mx-auto px-6 lg:px-12 pt-16 pb-12">
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
                         {/* Brand info */}
