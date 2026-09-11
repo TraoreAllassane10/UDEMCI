@@ -1,5 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Sora:wght@600;700&display=swap');
 @import 'tailwindcss';
-
 @import 'tw-animate-css';
 
 @source '../views';
@@ -12,6 +12,32 @@
         'Instrument Sans', ui-sans-serif, system-ui, sans-serif,
         'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
         'Noto Color Emoji';
+    --font-sora: 'Sora', sans-serif;
+    --font-manrope: 'Manrope', sans-serif;
+
+    --color-primary-container: #1b4332;
+    --color-on-primary-container: #86af99;
+    --color-on-primary: #ffffff;
+    --color-secondary-container: #c5e7d9;
+    --color-on-secondary-container: #4a695e;
+    --color-on-secondary: #ffffff;
+    --color-tertiary-container: #553500;
+    --color-on-tertiary-container: #dc9933;
+    --color-on-tertiary: #ffffff;
+    --color-primary-fixed: #c1ecd4;
+    --color-primary-fixed-dim: #a5d0b9;
+    --color-tertiary-fixed: #ffddb5;
+    --color-tertiary-fixed-dim: #ffb956;
+    --color-surface-container-lowest: #ffffff;
+    --color-surface-container-low: #f6f3f2;
+    --color-surface-container: #f0eded;
+    --color-surface-container-high: #eae7e7;
+    --color-surface-container-highest: #e5e2e1;
+    --color-surface-variant: #e5e2e1;
+    --color-on-surface: #1c1b1b;
+    --color-on-surface-variant: #414844;
+    --color-outline: #717973;
+    --color-outline-variant: #c1c8c2;
 
     --radius-lg: var(--radius);
     --radius-md: calc(var(--radius) - 2px);
