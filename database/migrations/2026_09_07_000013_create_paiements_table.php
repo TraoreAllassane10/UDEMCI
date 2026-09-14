@@ -9,8 +9,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('paiements', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('achat_id')->unique()->constrained('achats')->cascadeOnDelete();
+            $table->uuid('id')->primary();
+            $table->foreignUuid('achat_id')->unique()->constrained('achats')->cascadeOnDelete();
             $table->unsignedInteger('montant');
             $table->unsignedInteger('commission')->default(0);
             $table->unsignedInteger('revenu_createur')->default(0);

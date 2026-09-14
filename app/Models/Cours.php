@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -26,6 +27,8 @@ use Illuminate\Support\Carbon;
  */
 class Cours extends Model
 {
+    use HasUuids;
+    
     protected $fillable = [
         'profil_createur_id',
         'matiere_id',

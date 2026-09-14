@@ -9,9 +9,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('cours', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('profil_createur_id')->constrained('profil_createurs')->cascadeOnDelete();
-            $table->foreignId('matiere_id')->constrained('matieres')->cascadeOnDelete();
+            $table->uuid('id')->primary();
+            $table->foreignUuid('profil_createur_id')->constrained('profil_createurs')->cascadeOnDelete();
+            $table->foreignUuid('matiere_id')->constrained('matieres')->cascadeOnDelete();
             $table->string('titre');
             $table->string('slug')->unique();
             $table->text('description');

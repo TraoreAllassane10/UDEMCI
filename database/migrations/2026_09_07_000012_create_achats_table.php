@@ -9,9 +9,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('achats', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
-            $table->foreignId('cours_id')->constrained('cours')->cascadeOnDelete();
+            $table->foreignUuid('cours_id')->constrained('cours')->cascadeOnDelete();
             $table->unsignedInteger('somme_payee');
             $table->timestamp('date_paiement');
             $table->timestamps();

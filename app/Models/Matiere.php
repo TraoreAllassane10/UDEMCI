@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
@@ -11,6 +12,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  */
 class Matiere extends Model
 {
+    use HasUuids;
     protected $fillable = ['nom'];
 
     /** Cours de cette matière (1-n) — une matière peut avoir plusieurs cours */

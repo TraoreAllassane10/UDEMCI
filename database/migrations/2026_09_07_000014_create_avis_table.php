@@ -9,9 +9,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('avis', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
-            $table->foreignId('cours_id')->constrained('cours')->cascadeOnDelete();
+            $table->foreignUuid('cours_id')->constrained('cours')->cascadeOnDelete();
             $table->unsignedTinyInteger('note');
             $table->text('commentaire')->nullable();
             $table->timestamps();

@@ -9,9 +9,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('tentatives', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
-            $table->foreignId('quiz_id')->constrained('quizzes')->cascadeOnDelete();
+            $table->foreignUuid('quiz_id')->constrained('quizzes')->cascadeOnDelete();
             $table->decimal('score', 5, 2)->default(0);
             $table->timestamp('date_tentative')->useCurrent();
             $table->timestamps();

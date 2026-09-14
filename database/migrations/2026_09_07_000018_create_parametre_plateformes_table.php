@@ -9,7 +9,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('parametre_plateformes', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->decimal('taux_commission', 5, 2)->default(5);
             $table->string('devis', 10)->default('XOF');
             $table->foreignId('modifie_par')->nullable()->constrained('users')->nullOnDelete();

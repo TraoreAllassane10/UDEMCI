@@ -9,8 +9,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('piece_jointes', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('chapitre_id')->constrained('chapitres')->cascadeOnDelete();
+            $table->uuid('id')->primary();
+            $table->foreignUuid('chapitre_id')->constrained('chapitres')->cascadeOnDelete();
             $table->string('nom_fichier');
             $table->string('chemin_fichier');
             $table->string('type_fichier', 50)->nullable();

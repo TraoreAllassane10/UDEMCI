@@ -9,9 +9,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('progressions', function (Blueprint $table) {
-            $table->id();
+             $table->uuid('id')->primary();
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
-            $table->foreignId('chapitre_id')->constrained('chapitres')->cascadeOnDelete();
+            $table->foreignUuid('chapitre_id')->constrained('chapitres')->cascadeOnDelete();
             $table->boolean('is_complete')->default(false);
             $table->unsignedInteger('temps_visionnage_secondes')->default(0);
             $table->timestamp('date_achevement')->nullable();
