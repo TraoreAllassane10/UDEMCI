@@ -2,6 +2,7 @@ import { Head, Link, router, usePage } from "@inertiajs/react";
 import {
     ChevronDown,
     Layers,
+    LogOut,
     Menu,
     Search,
     ShoppingBag,
@@ -11,6 +12,7 @@ import {
 import { useState, type FormEvent, type ReactNode } from "react";
 import { catalogue, dashboard, home, login, register } from "@/routes";
 import type { Auth } from "@/types";
+import { Button } from "@/components/ui/button";
 
 interface WebLayoutProps {
     children: ReactNode;
@@ -42,6 +44,10 @@ export default function WebLayout({
             router.visit(catalogue().url);
         }
     };
+
+    const handleLogout = () => {
+        router.post('/logout');
+    }
 
     return (
         <div className="bg-[#fcf9f8] dark:bg-[#121212] font-['Manrope'] text-neutral-900 dark:text-neutral-100 antialiased min-h-screen flex flex-col justify-between selection:bg-[#1b4332] selection:text-white">
@@ -137,7 +143,8 @@ export default function WebLayout({
                                 </Link>
 
                                 <Link
-                                    href={dashboard()}
+                                    href={`${(auth.user.role === "eleve" && "/eleve/dashboard") || (auth.user.role === "createur" && "/createur/dashboard") || (auth.user.role === "admin" && "/admin/dashboard")} 
+                                       `}
                                     className="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg font-['Sora'] text-[13px] font-semibold bg-[#1b4332] hover:bg-[#012d1d] text-white transition-all shadow-sm"
                                 >
                                     <User className="w-4 h-4" />
@@ -145,6 +152,14 @@ export default function WebLayout({
                                         Mon Espace
                                     </span>
                                 </Link>
+
+                                <Button 
+                                onClick={handleLogout} className="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg font-['Sora'] text-[13px] font-semibold bg-destructive hover:bg-destructive/90 text-white transition-all shadow-sm cursor-pointer">
+                                    <LogOut className="w-4 h-4" />
+                                    <span className="hidden sm:inline">
+                                        Déconnexion
+                                    </span>
+                                </Button>
                             </>
                         ) : (
                             <>

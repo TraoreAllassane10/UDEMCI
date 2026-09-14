@@ -1,4 +1,4 @@
-import { Form, Head, Link } from '@inertiajs/react';
+import { Form, Head, Link } from "@inertiajs/react";
 import {
     ArrowRight,
     Award,
@@ -11,20 +11,20 @@ import {
     Presentation,
     ShieldCheck,
     User,
-} from 'lucide-react';
-import { useState } from 'react';
-import InputError from '@/components/input-error';
-import { Spinner } from '@/components/ui/spinner';
-import AuthLayout from '@/layouts/auth-layout';
-import { login } from '@/routes';
-import { store } from '@/routes/register';
+} from "lucide-react";
+import { useState } from "react";
+import InputError from "@/components/input-error";
+import { Spinner } from "@/components/ui/spinner";
+import AuthLayout from "@/layouts/auth-layout";
+import { login } from "@/routes";
+import { store } from "@/routes/register";
 
 type Props = {
     passwordRules?: string;
 };
 
 export default function Register({ passwordRules }: Props) {
-    const [role, setRole] = useState<'student' | 'teacher'>('student');
+    const [role, setRole] = useState<"eleve" | "createur">("eleve");
     const [showPassword, setShowPassword] = useState(false);
     const [showPasswordConfirm, setShowPasswordConfirm] = useState(false);
 
@@ -56,7 +56,7 @@ export default function Register({ passwordRules }: Props) {
                 {/* Form Section */}
                 <Form
                     {...store.form()}
-                    resetOnSuccess={['password', 'password_confirmation']}
+                    resetOnSuccess={["password", "password_confirmation"]}
                     disableWhileProcessing
                     className="space-y-4"
                 >
@@ -68,25 +68,30 @@ export default function Register({ passwordRules }: Props) {
                                     Votre objectif
                                 </span>
                                 <input type="hidden" name="role" value={role} />
-                                <div className="grid grid-cols-2 gap-3" id="role-selector">
+                                <div
+                                    className="grid grid-cols-2 gap-3"
+                                    id="role-selector"
+                                >
                                     {/* Student Card */}
                                     <button
                                         type="button"
-                                        onClick={() => setRole('student')}
+                                        onClick={() => setRole("eleve")}
                                         className={`relative flex flex-col items-center justify-center p-3.5 rounded-lg text-center transition-all duration-200 cursor-pointer ${
-                                            role === 'student'
-                                                ? 'bg-[#c5e7d9]/40 dark:bg-emerald-950/40 text-[#1b4332] dark:text-emerald-300 shadow-xs ring-2 ring-[#1b4332] dark:ring-emerald-500'
-                                                : 'bg-neutral-100 dark:bg-white/5 hover:bg-neutral-200 dark:hover:bg-white/10 text-neutral-900 dark:text-neutral-200'
+                                            role === "eleve"
+                                                ? "bg-[#c5e7d9]/40 dark:bg-emerald-950/40 text-[#1b4332] dark:text-emerald-300 shadow-xs ring-2 ring-[#1b4332] dark:ring-emerald-500"
+                                                : "bg-neutral-100 dark:bg-white/5 hover:bg-neutral-200 dark:hover:bg-white/10 text-neutral-900 dark:text-neutral-200"
                                         }`}
                                     >
-                                        <GraduationCap className={`w-6 h-6 mb-1 ${role === 'student' ? 'text-[#1b4332] dark:text-emerald-400' : 'text-[#46655a] dark:text-neutral-400'}`} />
+                                        <GraduationCap
+                                            className={`w-6 h-6 mb-1 ${role === "eleve" ? "text-[#1b4332] dark:text-emerald-400" : "text-[#46655a] dark:text-neutral-400"}`}
+                                        />
                                         <span className="font-['Sora'] text-[13px] font-semibold leading-tight">
                                             Je veux apprendre
                                         </span>
                                         <span className="text-[11px] text-neutral-600 dark:text-neutral-400 mt-0.5">
-                                            Étudiant &amp; Pro
+                                            élève &amp; Pro
                                         </span>
-                                        {role === 'student' && (
+                                        {role === "eleve" && (
                                             <span className="absolute -top-1.5 -right-1.5 w-4 h-4 bg-[#1b4332] dark:bg-emerald-600 text-white rounded-full flex items-center justify-center">
                                                 <Check className="w-2.5 h-2.5 text-white stroke-[3]" />
                                             </span>
@@ -96,23 +101,25 @@ export default function Register({ passwordRules }: Props) {
                                     {/* Teacher Card */}
                                     <button
                                         type="button"
-                                        onClick={() => setRole('teacher')}
+                                        onClick={() => setRole("createur")}
                                         className={`relative flex flex-col items-center justify-center p-3.5 rounded-lg text-center transition-all duration-200 cursor-pointer ${
-                                            role === 'teacher'
-                                                ? 'bg-[#c5e7d9]/40 dark:bg-emerald-950/40 text-[#1b4332] dark:text-emerald-300 shadow-xs ring-2 ring-[#1b4332] dark:ring-emerald-500'
-                                                : 'bg-neutral-100 dark:bg-white/5 hover:bg-neutral-200 dark:hover:bg-white/10 text-neutral-900 dark:text-neutral-200'
+                                            role === "createur"
+                                                ? "bg-[#c5e7d9]/40 dark:bg-emerald-950/40 text-[#1b4332] dark:text-emerald-300 shadow-xs ring-2 ring-[#1b4332] dark:ring-emerald-500"
+                                                : "bg-neutral-100 dark:bg-white/5 hover:bg-neutral-200 dark:hover:bg-white/10 text-neutral-900 dark:text-neutral-200"
                                         }`}
                                     >
-                                        <Presentation className={`w-6 h-6 mb-1 ${role === 'teacher' ? 'text-[#1b4332] dark:text-emerald-400' : 'text-[#46655a] dark:text-neutral-400'}`} />
+                                        <Presentation
+                                            className={`w-6 h-6 mb-1 ${role === "createur" ? "text-[#1b4332] dark:text-emerald-400" : "text-[#46655a] dark:text-neutral-400"}`}
+                                        />
                                         <span className="font-['Sora'] text-[13px] font-semibold leading-tight">
                                             Je veux enseigner
                                         </span>
                                         <span className="text-[11px] text-neutral-600 dark:text-neutral-400 mt-0.5">
-                                            Formateur agréé
+                                            Formateur
                                         </span>
-                                        {role === 'teacher' && (
+                                        {role === "createur" && (
                                             <span className="absolute -top-1.5 -right-1.5 w-4 h-4 bg-[#1b4332] dark:bg-emerald-600 text-white rounded-full flex items-center justify-center">
-                                                <Check className="w-2.5 h-2.5 text-white stroke-[3]" />
+                                                <Check className="w-2.5 h-2.5 text-white stroke-3" />
                                             </span>
                                         )}
                                     </button>
@@ -121,7 +128,10 @@ export default function Register({ passwordRules }: Props) {
 
                             {/* Full Name */}
                             <div className="space-y-1">
-                                <label className="block text-[13px] font-semibold text-neutral-900 dark:text-neutral-200" htmlFor="name">
+                                <label
+                                    className="block text-[13px] font-semibold text-neutral-900 dark:text-neutral-200"
+                                    htmlFor="name"
+                                >
                                     Nom complet
                                 </label>
                                 <div className="relative">
@@ -143,7 +153,10 @@ export default function Register({ passwordRules }: Props) {
 
                             {/* Email */}
                             <div className="space-y-1">
-                                <label className="block text-[13px] font-semibold text-neutral-900 dark:text-neutral-200" htmlFor="email">
+                                <label
+                                    className="block text-[13px] font-semibold text-neutral-900 dark:text-neutral-200"
+                                    htmlFor="email"
+                                >
                                     Adresse e-mail
                                 </label>
                                 <div className="relative">
@@ -164,7 +177,10 @@ export default function Register({ passwordRules }: Props) {
 
                             {/* Phone with Côte d'Ivoire Badge */}
                             <div className="space-y-1">
-                                <label className="block text-[13px] font-semibold text-neutral-900 dark:text-neutral-200" htmlFor="phone">
+                                <label
+                                    className="block text-[13px] font-semibold text-neutral-900 dark:text-neutral-200"
+                                    htmlFor="phone"
+                                >
                                     Numéro de téléphone
                                 </label>
                                 <div className="relative flex rounded-lg shadow-xs overflow-hidden border border-neutral-300 dark:border-neutral-800 focus-within:ring-2 focus-within:ring-[#1b4332] dark:focus-within:ring-emerald-500 focus-within:border-transparent">
@@ -189,14 +205,21 @@ export default function Register({ passwordRules }: Props) {
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                                 {/* Password */}
                                 <div className="space-y-1">
-                                    <label className="block text-[13px] font-semibold text-neutral-900 dark:text-neutral-200" htmlFor="password">
+                                    <label
+                                        className="block text-[13px] font-semibold text-neutral-900 dark:text-neutral-200"
+                                        htmlFor="password"
+                                    >
                                         Mot de passe
                                     </label>
                                     <div className="relative">
                                         <input
                                             id="password"
                                             name="password"
-                                            type={showPassword ? 'text' : 'password'}
+                                            type={
+                                                showPassword
+                                                    ? "text"
+                                                    : "password"
+                                            }
                                             required
                                             tabIndex={4}
                                             autoComplete="new-password"
@@ -206,7 +229,9 @@ export default function Register({ passwordRules }: Props) {
                                         />
                                         <button
                                             type="button"
-                                            onClick={() => setShowPassword(!showPassword)}
+                                            onClick={() =>
+                                                setShowPassword(!showPassword)
+                                            }
                                             tabIndex={-1}
                                             className="absolute right-2.5 top-1/2 -translate-y-1/2 text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white flex items-center justify-center p-1 cursor-pointer"
                                         >
@@ -222,14 +247,21 @@ export default function Register({ passwordRules }: Props) {
 
                                 {/* Confirm Password */}
                                 <div className="space-y-1">
-                                    <label className="block text-[13px] font-semibold text-neutral-900 dark:text-neutral-200" htmlFor="password_confirmation">
+                                    <label
+                                        className="block text-[13px] font-semibold text-neutral-900 dark:text-neutral-200"
+                                        htmlFor="password_confirmation"
+                                    >
                                         Confirmation
                                     </label>
                                     <div className="relative">
                                         <input
                                             id="password_confirmation"
                                             name="password_confirmation"
-                                            type={showPasswordConfirm ? 'text' : 'password'}
+                                            type={
+                                                showPasswordConfirm
+                                                    ? "text"
+                                                    : "password"
+                                            }
                                             required
                                             tabIndex={5}
                                             autoComplete="new-password"
@@ -239,7 +271,11 @@ export default function Register({ passwordRules }: Props) {
                                         />
                                         <button
                                             type="button"
-                                            onClick={() => setShowPasswordConfirm(!showPasswordConfirm)}
+                                            onClick={() =>
+                                                setShowPasswordConfirm(
+                                                    !showPasswordConfirm,
+                                                )
+                                            }
                                             tabIndex={-1}
                                             className="absolute right-2.5 top-1/2 -translate-y-1/2 text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white flex items-center justify-center p-1 cursor-pointer"
                                         >
@@ -250,7 +286,9 @@ export default function Register({ passwordRules }: Props) {
                                             )}
                                         </button>
                                     </div>
-                                    <InputError message={errors.password_confirmation} />
+                                    <InputError
+                                        message={errors.password_confirmation}
+                                    />
                                 </div>
                             </div>
 
@@ -265,14 +303,20 @@ export default function Register({ passwordRules }: Props) {
                                         className="mt-1 w-4 h-4 rounded text-[#1b4332] dark:text-emerald-500 accent-[#1b4332] focus:ring-[#1b4332] cursor-pointer"
                                     />
                                     <span className="text-[12px] leading-relaxed text-neutral-600 dark:text-neutral-400 group-hover:text-neutral-900 dark:group-hover:text-neutral-200 transition-colors select-none">
-                                        J'accepte les{' '}
-                                        <a className="text-[#1b4332] dark:text-emerald-400 font-semibold hover:underline" href="#">
+                                        J'accepte les{" "}
+                                        <a
+                                            className="text-[#1b4332] dark:text-emerald-400 font-semibold hover:underline"
+                                            href="#"
+                                        >
                                             conditions d'utilisation
-                                        </a>{' '}
-                                        et la{' '}
-                                        <a className="text-[#1b4332] dark:text-emerald-400 font-semibold hover:underline" href="#">
+                                        </a>{" "}
+                                        et la{" "}
+                                        <a
+                                            className="text-[#1b4332] dark:text-emerald-400 font-semibold hover:underline"
+                                            href="#"
+                                        >
                                             politique de confidentialité
-                                        </a>{' '}
+                                        </a>{" "}
                                         de la plateforme.
                                     </span>
                                 </label>
@@ -331,11 +375,15 @@ export default function Register({ passwordRules }: Props) {
             <div className="mt-4 flex items-center justify-center space-x-6 text-neutral-600 dark:text-neutral-400 opacity-80">
                 <div className="flex items-center space-x-1.5">
                     <ShieldCheck className="w-4 h-4 text-[#1b4332] dark:text-emerald-400" />
-                    <span className="text-[11px] font-semibold">Paiements Orange, MTN &amp; Wave</span>
+                    <span className="text-[11px] font-semibold">
+                        Paiements Orange, MTN &amp; Wave
+                    </span>
                 </div>
                 <div className="flex items-center space-x-1.5">
                     <Award className="w-4 h-4 text-[#1b4332] dark:text-emerald-400" />
-                    <span className="text-[11px] font-semibold">Certificats Ivoiriens</span>
+                    <span className="text-[11px] font-semibold">
+                        Certificats Ivoiriens
+                    </span>
                 </div>
             </div>
         </AuthLayout>
