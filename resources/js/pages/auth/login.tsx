@@ -1,4 +1,4 @@
-import { Form, Head, Link } from '@inertiajs/react';
+import { Form, Head, Link } from "@inertiajs/react";
 import {
     ArrowRight,
     Eye,
@@ -8,15 +8,15 @@ import {
     ShieldCheck,
     Smartphone,
     Star,
-} from 'lucide-react';
-import { useState } from 'react';
-import InputError from '@/components/input-error';
-import PasskeyVerify from '@/components/passkey-verify';
-import { Spinner } from '@/components/ui/spinner';
-import AuthLayout from '@/layouts/auth-layout';
-import { register } from '@/routes';
-import { store } from '@/routes/login';
-import { request } from '@/routes/password';
+} from "lucide-react";
+import { useState } from "react";
+import InputError from "@/components/input-error";
+import PasskeyVerify from "@/components/passkey-verify";
+import { Spinner } from "@/components/ui/spinner";
+import AuthLayout from "@/layouts/auth-layout";
+import { register } from "@/routes";
+import { store } from "@/routes/login";
+import { request } from "@/routes/password";
 
 type Props = {
     status?: string;
@@ -61,14 +61,14 @@ export default function Login({ status, canResetPassword }: Props) {
                     </div>
                 )}
 
-                <div className="relative z-10 mt-6">
+                {/* <div className="relative z-10 mt-6">
                     <PasskeyVerify />
-                </div>
+                </div> */}
 
                 {/* Form */}
                 <Form
                     {...store.form()}
-                    resetOnSuccess={['password']}
+                    resetOnSuccess={["password"]}
                     className="relative z-10 mt-6 flex flex-col space-y-5"
                 >
                     {({ processing, errors }) => (
@@ -111,7 +111,9 @@ export default function Login({ status, canResetPassword }: Props) {
                                     <input
                                         id="password"
                                         name="password"
-                                        type={showPassword ? 'text' : 'password'}
+                                        type={
+                                            showPassword ? "text" : "password"
+                                        }
                                         required
                                         tabIndex={2}
                                         autoComplete="current-password"
@@ -120,7 +122,9 @@ export default function Login({ status, canResetPassword }: Props) {
                                     />
                                     <button
                                         type="button"
-                                        onClick={() => setShowPassword(!showPassword)}
+                                        onClick={() =>
+                                            setShowPassword(!showPassword)
+                                        }
                                         tabIndex={-1}
                                         aria-label="Afficher ou masquer le mot de passe"
                                         className="absolute right-3.5 text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white focus:outline-none transition-colors duration-150 cursor-pointer flex items-center justify-center p-1"
@@ -191,44 +195,42 @@ export default function Login({ status, canResetPassword }: Props) {
                 </div>
 
                 {/* Social Buttons */}
-                <div className="relative z-10 grid grid-cols-2 gap-3">
-                    <button
-                        type="button"
-                        className="h-11 px-4 bg-neutral-100 dark:bg-white/5 hover:bg-neutral-200 dark:hover:bg-white/10 text-neutral-900 dark:text-neutral-200 rounded-lg text-[13px] font-semibold flex items-center justify-center space-x-2.5 shadow-xs border border-neutral-300/60 dark:border-neutral-800 transition-all duration-150 cursor-pointer active:scale-[0.98]"
-                    >
-                        <svg className="w-4 h-4 shrink-0" viewBox="0 0 24 24">
-                            <path
-                                d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.66-5.17 3.66-9.17z"
-                                fill="#4285F4"
-                            />
-                            <path
-                                d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.25v3.15C3.26 21.36 7.33 24 12 24z"
-                                fill="#34A853"
-                            />
-                            <path
-                                d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.25C.45 8.16 0 9.94 0 12s.45 3.84 1.25 5.42l4.03-3.15z"
-                                fill="#FBBC05"
-                            />
-                            <path
-                                d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.33 0 3.26 2.64 1.25 6.58l4.03 3.15c.95-2.83 3.6-4.98 6.72-4.98z"
-                                fill="#EA4335"
-                            />
-                        </svg>
-                        <span className="truncate">Google</span>
-                    </button>
-                    <button
-                        type="button"
-                        className="h-11 px-4 bg-neutral-100 dark:bg-white/5 hover:bg-neutral-200 dark:hover:bg-white/10 text-neutral-900 dark:text-neutral-200 rounded-lg text-[13px] font-semibold flex items-center justify-center space-x-2.5 shadow-xs border border-neutral-300/60 dark:border-neutral-800 transition-all duration-150 cursor-pointer active:scale-[0.98]"
-                    >
-                        <Smartphone className="w-4 h-4 text-[#1b4332] dark:text-emerald-400" />
-                        <span className="truncate">Téléphone</span>
-                    </button>
+                <div className="relative z-10  gap-3">
+                    <a href="/auth/redirect">
+                        <button
+                            type="button"
+                            className="h-11 w-full px-4 bg-neutral-100 dark:bg-white/5 hover:bg-neutral-200 dark:hover:bg-white/10 text-neutral-900 dark:text-neutral-200 rounded-lg text-[13px] font-semibold flex items-center justify-center space-x-2.5 shadow-xs border border-neutral-300/60 dark:border-neutral-800 transition-all duration-150 cursor-pointer active:scale-[0.98]"
+                        >
+                            <svg
+                                className="w-4 h-4 shrink-0"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.66-5.17 3.66-9.17z"
+                                    fill="#4285F4"
+                                />
+                                <path
+                                    d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.25v3.15C3.26 21.36 7.33 24 12 24z"
+                                    fill="#34A853"
+                                />
+                                <path
+                                    d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.25C.45 8.16 0 9.94 0 12s.45 3.84 1.25 5.42l4.03-3.15z"
+                                    fill="#FBBC05"
+                                />
+                                <path
+                                    d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.33 0 3.26 2.64 1.25 6.58l4.03 3.15c.95-2.83 3.6-4.98 6.72-4.98z"
+                                    fill="#EA4335"
+                                />
+                            </svg>
+                            <span className="truncate">Google</span>
+                        </button>
+                    </a>
                 </div>
 
                 {/* Footer */}
                 <div className="relative z-10 mt-8 pt-5 text-center border-t border-neutral-200 dark:border-neutral-800">
                     <p className="text-[14px] text-neutral-600 dark:text-neutral-400">
-                        Pas encore de compte ?{' '}
+                        Pas encore de compte ?{" "}
                         <Link
                             href={register()}
                             className="font-['Sora'] text-[14px] font-semibold text-[#1b4332] dark:text-emerald-400 hover:underline ml-1"

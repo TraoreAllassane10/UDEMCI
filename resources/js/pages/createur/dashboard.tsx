@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
     Plus,
     Wallet,
@@ -13,10 +13,10 @@ import {
     MessageSquare,
     Book,
     Video,
-    CreditCard,
     DollarSign,
 } from "lucide-react";
 import WebLayout from "@/layouts/web-layout";
+import { Link } from "@inertiajs/react";
 
 export default function InstructorDashboardPage() {
     const [selectedPeriod, setSelectedPeriod] = useState(
@@ -47,10 +47,10 @@ export default function InstructorDashboardPage() {
                             </button>
                         </div>
 
-                        <button className="bg-[#052e16] hover:bg-[#031d0e] text-white font-bold px-5 py-2.5 rounded-xl text-xs transition-colors flex items-center gap-2 shadow-sm">
+                        <Link href={`/createur/nouveau-cours`} className="bg-[#052e16] hover:bg-[#031d0e] text-white font-bold px-5 py-2.5 rounded-xl text-xs transition-colors flex items-center gap-2 shadow-sm">
                             <Plus className="w-4 h-4" />
                             Créer un nouveau cours
-                        </button>
+                        </Link>
                     </div>
                 </div>
 

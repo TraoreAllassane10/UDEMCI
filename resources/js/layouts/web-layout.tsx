@@ -1,18 +1,29 @@
 import { Head, Link, router, usePage } from "@inertiajs/react";
 import {
-    ChevronDown,
-    Layers,
+    CreditCardIcon,
     LogOut,
+    LogOutIcon,
     Menu,
     Search,
+    SettingsIcon,
     ShoppingBag,
     User,
+    UserIcon,
     X,
 } from "lucide-react";
 import { useState, type FormEvent, type ReactNode } from "react";
-import { catalogue, dashboard, home, login, register } from "@/routes";
+import { catalogue, home, login, register } from "@/routes";
 import type { Auth } from "@/types";
 import { Button } from "@/components/ui/button";
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuGroup,
+    DropdownMenuItem,
+    DropdownMenuLabel,
+    DropdownMenuSeparator,
+    DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 interface WebLayoutProps {
     children: ReactNode;
@@ -46,8 +57,8 @@ export default function WebLayout({
     };
 
     const handleLogout = () => {
-        router.post('/logout');
-    }
+        router.post("/logout");
+    };
 
     return (
         <div className="bg-[#fcf9f8] dark:bg-[#121212] font-['Manrope'] text-neutral-900 dark:text-neutral-100 antialiased min-h-screen flex flex-col justify-between selection:bg-[#1b4332] selection:text-white">
@@ -70,17 +81,6 @@ export default function WebLayout({
                             UDEMCI
                         </span>
                     </Link>
-
-                    {/* Category Dropdown Button */}
-                    <div className="hidden lg:flex items-center gap-3 shrink-0">
-                        <Link
-                            href={catalogue()}
-                            className="flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-neutral-100 dark:bg-white/5 text-neutral-700 dark:text-neutral-300 font-semibold text-[13px] hover:bg-neutral-200 dark:hover:bg-white/10 hover:text-[#012d1d] transition-colors"
-                        >
-                            <Layers className="w-4 h-4 text-[#1b4332] dark:text-emerald-400" />
-                            <ChevronDown className="w-3.5 h-3.5 opacity-60" />
-                        </Link>
-                    </div>
 
                     {/* Search Bar */}
                     <div className="flex-1 max-w-md hidden md:block">
@@ -153,13 +153,103 @@ export default function WebLayout({
                                     </span>
                                 </Link>
 
-                                <Button 
-                                onClick={handleLogout} className="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg font-['Sora'] text-[13px] font-semibold bg-destructive hover:bg-destructive/90 text-white transition-all shadow-sm cursor-pointer">
-                                    <LogOut className="w-4 h-4" />
-                                    <span className="hidden sm:inline">
-                                        Déconnexion
-                                    </span>
-                                </Button>
+                                <DropdownMenu>
+                                    <DropdownMenuTrigger asChild>
+                                        <Button
+                                            variant="ghost"
+                                            className="relative h-10 w-10 rounded-full ring-2 ring-emerald-600/20 hover:ring-emerald-600/40 focus-visible:ring-2 focus-visible:ring-[#1b4332] transition-all p-0 overflow-hidden"
+                                        >
+                                            {auth.user?.avatar ? (
+                                                <img
+                                                    src={auth.user.avatar}
+                                                    alt={auth.user.name}
+                                                    className="h-full w-full object-cover"
+                                                />
+                                            ) : (
+                                                <div className="flex h-full w-full items-center justify-center bg-[#1b4332] dark:bg-emerald-700 text-white font-['Sora'] text-sm font-bold uppercase">
+                                                    {auth.user?.name
+                                                        ? auth.user.name.slice(
+                                                              0,
+                                                              2,
+                                                          )
+                                                        : "UI"}
+                                                </div>
+                                            )}
+                                        </Button>
+                                    </DropdownMenuTrigger>
+
+                                    <DropdownMenuContent
+                                        className="w-64 mt-2 p-2 bg-white dark:bg-[#18181b] border border-neutral-200/80 dark:border-neutral-800 rounded-xl shadow-xl shadow-neutral-900/5 dark:shadow-none animate-in fade-in-80 zoom-in-95"
+                                        align="end"
+                                        forceMount
+                                    >
+                                        {/* En-tête Profil : Infos Utilisateur */}
+                                        <DropdownMenuLabel className="font-normal p-2">
+                                            <div className="flex flex-col space-y-1.5">
+                                                <div className="flex items-center justify-between">
+                                                    <p className="text-sm font-semibold font-['Sora'] text-neutral-900 dark:text-neutral-100 truncate">
+                                                        {auth.user?.name}
+                                                    </p>
+                                                    <span className="capitalize text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-950/50 text-[#1b4332] dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800">
+                                                        {auth.user?.role ||
+                                                            "Élève"}
+                                                    </span>
+                                                </div>
+                                                <p className="text-xs text-neutral-500 dark:text-neutral-400 truncate">
+                                                    {auth.user?.email}
+                                                </p>
+                                            </div>
+                                        </DropdownMenuLabel>
+
+                                        <DropdownMenuSeparator className="my-1 bg-neutral-100 dark:bg-neutral-800" />
+
+                                        {/* Groupe d'actions principales */}
+                                        <DropdownMenuGroup className="space-y-0.5">
+                                            <DropdownMenuItem asChild>
+                                                <Link
+                                                    href="/parametre-compte"
+                                                    className="flex items-center gap-2.5 px-2.5 py-2 text-[13px] font-medium text-neutral-700 dark:text-neutral-200 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800/80 transition-colors cursor-pointer"
+                                                >
+                                                    <UserIcon className="w-4 h-4 text-neutral-500 dark:text-neutral-400" />
+                                                    <span>Mon profil</span>
+                                                </Link>
+                                            </DropdownMenuItem>
+
+                                            <DropdownMenuItem asChild>
+                                                <Link
+                                                    href="/billing"
+                                                    className="flex items-center gap-2.5 px-2.5 py-2 text-[13px] font-medium text-neutral-700 dark:text-neutral-200 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800/80 transition-colors cursor-pointer"
+                                                >
+                                                    <CreditCardIcon className="w-4 h-4 text-neutral-500 dark:text-neutral-400" />
+                                                    <span>
+                                                        Facturation & Achats
+                                                    </span>
+                                                </Link>
+                                            </DropdownMenuItem>
+
+                                            <DropdownMenuItem asChild>
+                                                <Link
+                                                    href="/settings"
+                                                    className="flex items-center gap-2.5 px-2.5 py-2 text-[13px] font-medium text-neutral-700 dark:text-neutral-200 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800/80 transition-colors cursor-pointer"
+                                                >
+                                                    <SettingsIcon className="w-4 h-4 text-neutral-500 dark:text-neutral-400" />
+                                                    <span>Paramètres</span>
+                                                </Link>
+                                            </DropdownMenuItem>
+                                        </DropdownMenuGroup>
+
+                                        <DropdownMenuSeparator className="my-1 bg-neutral-100 dark:bg-neutral-800" />
+
+                                        {/* Déconnexion */}
+                                        <DropdownMenuItem
+                                            onClick={handleLogout}
+                                            className="flex items-center gap-2.5 px-2.5 py-2 text-[13px] font-medium text-rose-600 dark:text-rose-400 rounded-lg hover:bg-rose-50 dark:hover:bg-rose-950/30 transition-colors cursor-pointer"
+                                        >
+                                            <LogOutIcon className="w-4 h-4 text-rose-500 dark:text-rose-400" />
+                                            <span>Se déconnecter</span>
+                                        </DropdownMenuItem>
+                                    </DropdownMenuContent>
+                                </DropdownMenu>
                             </>
                         ) : (
                             <>
